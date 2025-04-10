@@ -44,8 +44,15 @@ function encryptImage(imagePath, key) {
     const iv = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
     const ciphertext = Buffer.concat([cipher.update(plaintext), cipher.final()]);
-    const encryptedPath = `${imagePath}.enc`;
+
+    // Create the 'encrypted' folder if it doesn't exist
+    const encryptedDir = path.join(__dirname, 'encrypted');
+    fs.mkdirSync(encryptedDir, { recursive: true });
+
+    // Save the encrypted file in the 'encrypted' folder
+    const encryptedPath = path.join(encryptedDir, `${path.basename(imagePath)}.enc`);
     fs.writeFileSync(encryptedPath, Buffer.concat([iv, ciphertext]));
+
     return encryptedPath;
 }
 
