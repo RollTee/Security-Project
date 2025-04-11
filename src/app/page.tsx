@@ -49,11 +49,7 @@ export default function ImagesPage() {
 
     return (
         <div>
-            <nav>
-                <a href="/" className="logo">
-                    <img id="logo-btn" src="/static/img/logo.png" alt="Logo" />
-                </a>
-            </nav>
+            
 
             <div className="container">
                 <h1>Upload Image</h1>
